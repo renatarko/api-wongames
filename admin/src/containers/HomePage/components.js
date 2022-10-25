@@ -1,5 +1,5 @@
 /* eslint-disable */
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const Block = styled.div`
   width: 100%;
@@ -22,7 +22,7 @@ const Block = styled.div`
       top: 0;
       left: 0;
       border-radius: 0.3rem;
-      content: '';
+      content: "";
       opacity: 0.1;
       background: #ffffff;
     }
@@ -36,12 +36,12 @@ const Block = styled.div`
   }
   #mainHeader {
     &:after {
-      content: '';
+      content: "";
       width: 100%;
       height: 3px;
       margin-top: 4px;
       display: block;
-      background: #f0b41e;
+      background: ${(props) => props.theme.main.colors.won.orange};
     }
   }
 
@@ -77,7 +77,7 @@ const P = styled.p`
 
 const Wave = styled.div`
   &:before {
-    content: '👋';
+    content: "👋";
     position: absolute;
     top: 24px;
     right: 30px;
@@ -97,11 +97,11 @@ const ALink = styled.a`
   font-size: 13px;
 
   &:before {
-    content: '\f105';
+    content: "\f105";
 
     font-weight: 600;
     margin-right: 10px;
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
   }
 
   &:hover,
@@ -118,13 +118,13 @@ const ALink = styled.a`
     top: 0;
     left: 0;
     border-radius: 0.3rem;
-    content: '';
+    content: "";
     opacity: 0.1;
     background: #ffffff;
   }
 
   ${({ type }) =>
-    type === 'blog' || type === 'documentation'
+    type === "blog" || type === "documentation"
       ? css`
           padding-left: 20px;
           margin-top: 16px;
@@ -152,13 +152,13 @@ const ALink = styled.a`
         `}
 
   ${({ type }) =>
-    type === 'blog' &&
+    type === "blog" &&
     css`
       background-color: #333740;
     `}
 
   ${({ type }) =>
-    type === 'documentation' &&
+    type === "documentation" &&
     css`
       background-color: #005fea;
     `}
@@ -189,19 +189,19 @@ const LinkWrapper = styled.a`
     position: absolute;
     left: 30px;
     top: 38px;
-    font-family: 'FontAwesome';
+    font-family: "FontAwesome";
     font-size: 38px;
 
     ${({ type }) => {
-      if (type === 'doc') {
+      if (type === "doc") {
         return css`
-          content: '\f02d';
+          content: "\f02d";
           color: #42b88e;
         `;
       }
 
       return css`
-        content: '\f121';
+        content: "\f121";
         color: #f0811e;
       `;
     }}
@@ -257,4 +257,13 @@ const SocialLinkWrapper = styled.div`
   }
 `;
 
-export { ALink, Block, Container, LinkWrapper, P, Separator, SocialLinkWrapper, Wave };
+export {
+  ALink,
+  Block,
+  Container,
+  LinkWrapper,
+  P,
+  Separator,
+  SocialLinkWrapper,
+  Wave,
+};
