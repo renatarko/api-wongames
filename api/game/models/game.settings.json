@@ -8,16 +8,15 @@
   "options": {
     "increments": true,
     "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
-  "pluginOptions": {},
   "attributes": {
     "name": {
       "type": "string",
       "required": true,
       "unique": true
     },
-    "slog": {
+    "slug": {
       "type": "uid",
       "targetField": "name",
       "required": true
@@ -34,7 +33,6 @@
     "price": {
       "type": "decimal",
       "required": true,
-      "unique": false,
       "default": 0
     },
     "release_date": {
@@ -43,12 +41,12 @@
     "rating": {
       "type": "enumeration",
       "enum": [
-        "FREE",
-        "peg3",
-        "peg7",
-        "peg12",
-        "peg16",
-        "peg18"
+        "BR0",
+        "BR10",
+        "BR12",
+        "BR14",
+        "BR16",
+        "BR18"
       ]
     },
     "cover": {
@@ -61,7 +59,7 @@
       "required": false,
       "pluginOptions": {}
     },
-    "galiery": {
+    "gallery": {
       "collection": "file",
       "via": "related",
       "allowedTypes": [
