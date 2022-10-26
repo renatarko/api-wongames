@@ -2,13 +2,11 @@
   "kind": "collectionType",
   "collectionName": "games",
   "info": {
-    "name": "game",
-    "description": ""
+    "name": "game"
   },
   "options": {
     "increments": true,
-    "timestamps": true,
-    "draftAndPublish": false
+    "timestamps": true
   },
   "attributes": {
     "name": {
@@ -56,8 +54,7 @@
         "images"
       ],
       "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
+      "required": false
     },
     "gallery": {
       "collection": "file",
@@ -66,8 +63,7 @@
         "images"
       ],
       "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
+      "required": false
     },
     "categories": {
       "collection": "category",

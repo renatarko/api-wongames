@@ -20,9 +20,50 @@ async function getGameInfo(slug) {
   };
 }
 
-// async function getByName(name, entityName) {
+async function getByName(name, entityName) {
+  const item = await strapi.services[entityName].find({ name });
+  return item.length ? item[0] : null;
+}
 
-// }
+async function create(name, entityName) {
+  const item = await getByName(name, entityName);
+
+  if (!item) {
+    return await strapi.services[entityName].create({
+      name,
+      slug: slugify(name, { lower: true }),
+    });
+  }
+}
+
+async function createManyToManyData(products) {
+  const developers = {};
+  const publishers = {};
+  const categories = {};
+  const platforms = {};
+
+  products.forEach((product) => {
+    const { developer, publisher, genres, supportedOperatingSystems } = product;
+
+    genres &&
+      genres.forEach((item) => {
+        categories[item] = true;
+      });
+    supportedOperatingSystems &&
+      supportedOperatingSystems.forEach((item) => {
+        platforms[item] = true;
+      });
+    developers[developer] = true;
+    publishers[publisher] = true;
+  });
+
+  return Promise.all([
+    ...Object.keys(developers).map((name) => create(name, "developer")),
+    ...Object.keys(publishers).map((name) => create(name, "publisher")),
+    ...Object.keys(categories).map((name) => create(name, "category")),
+    ...Object.keys(platforms).map((name) => create(name, "platform")),
+  ]);
+}
 
 const axios = require("axios");
 const slugify = require("slugify");
@@ -35,17 +76,10 @@ module.exports = {
       data: { products },
     } = await axios.get(gogApiUrl);
 
-    await strapi.services.publisher.create({
-      name: products[1].publisher,
-      slug: slugify(products[1].publisher).toLowerCase(),
-    });
+    await createManyToManyData([products[2], products[3]]);
 
-    // await strapi.services.developer.create({
-    //   name: products[1].developer,
-    //   slug: slugify(products[1].developer).toLowerCase(),
-    // });
-
-    //console.log(products[0]);
+    // await create(products[1].publisher, "publisher");
+    // await create(products[1].developer, "developer");
 
     //console.log(await getGameInfo(products[1].slug));
   },
